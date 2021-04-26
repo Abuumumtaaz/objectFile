@@ -21,9 +21,9 @@
         return this;
     }
 }
-*/
 
-//subclass 
+
+//subclass or class inhiritance 
 class Admin extends User{
     constructor(username, email, title){
         super(username, email);
@@ -32,6 +32,7 @@ class Admin extends User{
     deleteUser(user){ users = users.filter(u => u.username !== user.username );
 }
 }
+*/
 //constractor function
 
 function User(username, email){
@@ -54,11 +55,25 @@ User.prototype.inScore = function() {
         return this;
 };
 
+//constractor or inhiritance
+function Admin(username, email, tittle){
+   User.call(this, username, email)
+   this.tittle = tittle;
+}
+
+Admin.prototype = Object.create(User.prototype)
+
+Admin.prototype.deleteUser = function(u){
+  users = users.filter(user => {
+      return user.email != u.email;
+  })
+};
+
 const userOne = new User('Ahmed', 'ahmedqayr22@gmail.com');
 const userTwo = new User('Ramla', 'rayelmi22@gmail.com');
 const userThree = new User('Damla', 'elmi22@gmail.com');
 const userFour = new User('Rayaan', 'rayaan22@gmail.com');
-const userFive = new Admin('Raage', 'raage22@gmail.com', 'pro');
+const userFive = new Admin('Raage', 'raage22@gmail.com', 'prf');
 
 console.log(userFive, userOne, userFour, userTwo);
 userOne.login(); 
@@ -67,7 +82,7 @@ userTwo.logout();
 userOne.logout();
 userOne.inScore();
 userTwo.inScore();
-console.log(users);
+
 //userTwo.login().logout().inScore();
 //userFour.inScore().inScore();
 //userThree.login().login().login().logout();
@@ -81,3 +96,4 @@ console.log(users);
 
 
 
+ 
